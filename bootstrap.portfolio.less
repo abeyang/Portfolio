@@ -1,0 +1,137 @@
+/*!
+ * Bootstrap v1.1.1
+ *
+ * Copyright 2011 Twitter, Inc
+ * Licensed under the Apache License v2.0
+ * http://www.apache.org/licenses/LICENSE-2.0
+ *
+ * Designed and built with all the love in the world @twitter by @mdo and @fat.
+ * Date: @DATE
+ */
+
+// CSS Reset
+@import "../../lib/reset.less";
+
+// Core variables and mixins
+@import "../../lib/variables.less"; // Modify this for custom colors, font-sizes, etc
+@import "../../lib/mixins.less";
+
+// Grid system and page structure
+@import "../../lib/scaffolding.less";
+
+// Styled patterns and elements
+@import "../../lib/type.less";
+@import "../../lib/forms.less";
+@import "../../lib/tables.less";
+@import "../../lib/patterns.less";
+
+/*
+ * Portfolio
+ * by Abe Yang
+ * ------------------------------------------------------------------------------------------- */
+
+// GLOBALS
+// -----------
+
+@linkColor:         #0090FF;
+@graySleek:         #333;
+@bgColor:           #D5DEE7;
+@sidebar-bgColor:   #E2E9F1;
+@pane-bgColor:      #fefefe;
+@borderColor:		1px solid #aaa;
+@borderDark:        1px solid #B4BBC4;
+@borderDarkest:     1px solid #111;
+
+@shadowInsetWhite:  inset 0 1px 0 rgba(255,255,255,.33);
+@shadowBorder:      0 1px 2px rgba(114,125,160,.75);
+@shadowDark:        0 2px 3px rgba(0,0,0,.5);
+@shadowDepressed:   inset 0 1px 0 rgba(0,0,0,.25), 0 1px 0 rgba(255,255,255,.5);
+@shadow:            inset 0 1px 0 rgba(255,255,255,.75), 0 2px 3px rgba(0,0,0,.1);
+
+@space:             10px;
+@topbarHeight:      40px;
+@topbarMargin:      6px;
+@sidebarWidth:      220px;
+@contactlistWidth:  350px;
+
+h1, h2, h3, p, div, span, li { 
+	font-family: "Lucida Grande", Helvetica, Arial;
+	color: #000;
+}
+
+h1 { margin-bottom: 0; }
+
+body {
+	background: @bgColor; /*url(http://subtlepatterns.com/patterns/white_texture.png) top left repeat;*/
+	padding-top: @space * 2;
+}
+
+#nav {
+	margin-top: @space * 1.5;
+	
+	li {
+		display: block;
+		float: left;
+		margin-left: @space * 3;
+	}
+}
+
+.main {
+	background-color: @pane-bgColor;
+	height: 600px;
+	.border-radius();
+	border: @borderColor;
+	.box-shadow(@shadowBorder);
+
+	.subnav {
+		height: @space * 4;
+		#gradient > .vertical(#eee, #ddd);
+		border-bottom: @borderColor;
+/*		background: @bgColor url(http://subtlepatterns.com/patterns/wood_pattern.png) top left repeat;*/
+		.border-radius(5px 5px 0 0);
+		color: #333;
+		
+		.title div, .prev div, .next div {
+			padding: @space;
+			padding-bottom: @space + 2;
+			
+			&:hover {
+				#gradient > .vertical(#ccc, #aaa);
+			}
+		}
+		
+		.title div {
+			text-align: center;
+			font-weight: bold;
+		}
+		
+		.prev div {
+			border-right: @borderColor;
+		}
+		
+		.next div { 
+			text-align: right; 
+			border-left: @borderColor;
+		}
+	}
+	
+	.content {
+		padding: @space;
+	}
+}
+
+footer { 
+	border-top: none; 
+	margin-top: 0;
+	
+	li { 
+		list-style-type: none; 
+		font-size: 11px;
+		line-height: 1.5;
+	}
+	
+	li, h3 {
+		color: #777;
+		text-shadow: 0 1px 0 rgba(255, 255, 255, 1);
+	}
+}

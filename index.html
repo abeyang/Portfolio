@@ -1,0 +1,200 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+	<title>Rolodex</title>
+	
+	<!-- Le styles -->
+    <link href="bootstrap.portfolio.less" rel="stylesheet/less">
+    
+</head>
+
+<body>
+
+	<div class="container">
+		<header class="row">
+			<h1 class="span6 offset1">
+				Abe Yang (i)
+			</h1>
+			<ul id="nav" class="span8">
+				<li>Apps</li>
+				<li>Websites</li>
+				<li>Video</li>
+				<li>Graphic Designs</li>
+				<li>Photography</li>
+			</ul>
+		</header>
+		
+		<section class="row">
+			<div class="span14 offset1 main">
+				<div class="subnav">
+					<div class="row">
+						<div class="span3 prev">
+							<div>Prev</div>
+						</div>
+						<div class="span8 title">
+							<div>Title</div>
+						</div>
+						<div class="span3 next">
+							<div>Next</div>
+						</div>
+					</div>
+				</div>
+				<div class="content">
+					<img src="http://placehold.it/800x440">					
+				</div>
+			</div>
+		</section>
+		
+		<footer class="row">
+			<h3 class="span3 offset1">
+				Skillset
+			</h3>
+			
+		</footer>
+		
+	</div> <!-- .container -->
+	
+    
+    <!-- Templates --> 
+ 
+    <script type="text/template" id="skillset-item-template"> 
+        <li id="skill-<%= id %>"><%= title %></li>
+    </script>
+
+    <script type="text/template" id="contact-card-template"> 
+	    <div id="contact-card">
+	    	<div id="card-name" class="row"><strong><%= first %></strong> <%= last %></div>
+			<div id="card-major" class="row">Major: <%= grade ? '<span>' + grade + '</span>' : '' %><%= major %></div>
+			<% if (email) { %><div id="card-email" class="row">Email: <%= email %></div><% } %>
+			<% if (phone) { %><div id="card-phone" class="row">Phone: <%= phone %></div><% } %>
+			<% if (hometown) { %><div id="card-hometown" class="row">Hometown: <%= hometown %></div><% } %>
+	    </div>
+    </script>
+    
+    <!-- JS Shtuff -->
+    <script src="../../js/less.js" type="text/javascript"></script>
+	<script src="../../js/jquery-1.7.1.min.js" type="text/javascript"></script>
+	<script src="../../js/json2.js" type="text/javascript"></script>
+    <script src="../../js/underscore.js" type="text/javascript"></script>
+    <script src="../../js/backbone.js" type="text/javascript"></script>
+    
+    <script>
+
+    $(function() {
+        less.env = "development";
+        less.watch();
+		
+		// Collections
+		
+        var Skillsets = Backbone.Collection.extend({
+			// ...
+        });
+		
+		window.skillsets = new Skillsets;
+		skillsets.add([
+			{id:1, title: 'HTML5', slug: 'html', category: 0},
+			{id:2, title: 'CSS3', slug: 'css', category: 0},
+			{id:3, title: '960.gs', slug: '960', category: 0},
+			{id:4, title: 'Less/Bootstrap', slug: 'less', category: 0},
+			{id:5, title: 'Javascript', slug: 'js', category: 0},
+			{id:6, title: 'JQuery', slug: 'jquery', category: 0},
+			{id:7, title: 'Backbone', slug: 'backbone', category: 0},
+			
+			{id:11, title: 'PHP', slug: 'php', category: 1},
+			{id:12, title: 'Ruby on Rails', slug: 'ror', category: 1},
+			{id:13, title: 'Wordpress', slug: 'wp', category: 1},
+			
+			{id:21, title: 'Photoshop', slug: 'ps', category: 2},
+			{id:22, title: 'Illustrator', slug: 'il', category: 2},
+			{id:23, title: 'Omnigraffle', slug: 'om', category: 2},
+			{id:24, title: 'Invision', slug: 'iv', category: 2},
+			
+			{id:31, title: 'Final Cut Pro', slug: 'fcp', category: 3},
+			{id:32, title: 'Premiere', slug: 'pr', category: 3},
+			{id:33, title: 'After Effects', slug: 'ae', category: 3},
+			{id:34, title: 'Maya', slug: 'maya', category: 3},
+			{id:35, title: 'Shake', slug: 'shake', category: 3}
+		]);
+		
+		// Views
+		
+        var SkillsetsView = Backbone.View.extend({
+            el: $('footer'),
+			template: _.template($('#skillset-item-template').html()),
+            initialize: function() {
+                _.bindAll(this, 'render');
+                
+                this.render();
+            },
+
+            render: function() {
+				var currentcat = 0;
+				var div = $('<div>').addClass('span3');
+
+                _(skillsets.models).each(function(item) {
+					// create a new column
+					if (currentcat != item.get('category')) {
+						currentcat = item.get('category');
+						$(this.el).append(div);
+						div = $('<div>').addClass('span3');
+					}
+					div.append(this.template(item.toJSON()));
+                }, this);
+				
+				// necessary for final column
+				$(this.el).append(div);
+            },
+            
+            addItem: function(contact) {
+				var contactView = new ContactView({
+					model: contact
+				});
+				$(this.el).append(contactView.render().el);
+            },
+            
+            // highlight contact in list, and show its info
+            showInfo: function(id) {
+                $('.contact-item').removeClass('active');
+                $('#contactlist-' + id).addClass('active');
+                $('#contactinfo').html(this.template(contactsMini.get(id).toJSON()));
+            }
+        });
+		
+		var skillsetsview = new SkillsetsView;
+		
+             
+        // Router
+        var Rolodex = Backbone.Router.extend({
+           routes: {
+               "": "contacts",
+               "/contacts": "contacts",
+               "/contacts/:page": "contacts",
+               "/calendar": "calendar"
+           }, 
+           contacts: function(page) {
+               $('.sidebar li').removeClass('active');
+               $('#nav-contacts').addClass('active');
+               $('#calendar').hide();
+               $('#contacts').show();
+               
+               // console.log('page is: ' + page);
+               if (typeof page != 'undefined') {
+                   contactListView.showInfo(page);
+               }
+           },
+           calendar: function() {
+               $('.sidebar li').removeClass('active');
+               $('#nav-calendar').addClass('active');
+               $('#contacts').hide();
+               $('#calendar').show();
+           }
+        });
+        
+        // var rolodex = new Rolodex;
+        // Backbone.history.start();
+    });
+
+    </script>
+</body>
+</html>
