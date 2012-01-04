@@ -2,7 +2,7 @@
 <html lang="en">
   <head>
     <meta charset="utf-8">
-	<title>Rolodex</title>
+	<title>Portfolio</title>
 	
 	<!-- Le styles -->
     <link href="bootstrap.portfolio.less" rel="stylesheet/less">
@@ -14,37 +14,50 @@
 	<div class="container">
 		<header class="row">
 			<h1 class="span6 offset1">
-				Abe Yang (i)
+				Name (i)
 			</h1>
 			<ul id="nav" class="span8">
-				<li>Apps</li>
-				<li>Websites</li>
-				<li>Video</li>
-				<li>Graphic Designs</li>
-				<li>Photography</li>
+				<li id="nav-webapps">Web Apps</li>
+				<li id="nav-websites">Websites</li>
+				<li id="nav-video">Video</li>
+				<li id="nav-graphicdesign">Graphic Designs</li>
+				<li id="nav-fun">Fun</li>
 			</ul>
 		</header>
 		
-		<section class="row">
-			<div class="span14 offset1 main">
+		<section class="row" id="card">
+			<div id="front" class="span14 offset1 main">
 				<div class="subnav">
 					<div class="row">
 						<div class="span3 prev">
-							<div>Prev</div>
+							<a href="#" id="prev">Previous Project</a>
 						</div>
-						<div class="span8 title">
-							<div>Title</div>
+						<div class="span4 title">
+							<div id="title">Title</div>
+						</div>
+						<div class="span4 companydate">
+							<div><span id="company">Company</span> / <span id="date">Dec 2009</span></div>
 						</div>
 						<div class="span3 next">
-							<div>Next</div>
+							<a id="next">Next Project</a>
 						</div>
 					</div>
 				</div>
-				<div class="content">
-					<img src="http://placehold.it/800x440">					
+				<div id="hero">
+					<img src="http://placehold.it/800x450">					
 				</div>
-			</div>
-		</section>
+				<div id="content">
+					Nulla vitae elit libero, a pharetra augue. Cum sociis natoque penatibus et magnis dis parturient montes, nascetur ridiculus mus. Vivamus sagittis lacus vel augue laoreet rutrum faucibus dolor auctor. Cras mattis consectetur purus sit amet fermentum. Vivamus sagittis lacus vel augue laoreet rutrum faucibus dolor auctor. Maecenas faucibus mollis interdum. Integer posuere erat a ante venenatis dapibus posuere velit aliquet. Maecenas faucibus mollis interdum. Etiam porta sem malesuada magna mollis euismod. Cras justo odio, dapibus ac facilisis in, egestas eget quam. Morbi leo risus, porta ac consectetur ac, vestibulum at eros.
+				</div>
+			</div> <!-- /#front -->
+			
+			<div id="back" class="span14 offset1 main">
+				<div class="subnav">
+					<div>Select a Project</div>
+				</div>
+				
+			</div> <!-- /#back -->
+		</section> <!-- /#card -->
 		
 		<footer class="row">
 			<h3 class="span3 offset1">
@@ -93,10 +106,10 @@
 		
 		window.skillsets = new Skillsets;
 		skillsets.add([
-			{id:1, title: 'HTML5', slug: 'html', category: 0},
-			{id:2, title: 'CSS3', slug: 'css', category: 0},
+			{id:1, title: 'HTML/HTML5', slug: 'html', category: 0},
+			{id:2, title: 'CSS/CSS3', slug: 'css', category: 0},
 			{id:3, title: '960.gs', slug: '960', category: 0},
-			{id:4, title: 'Less/Bootstrap', slug: 'less', category: 0},
+			{id:4, title: 'Less+Bootstrap', slug: 'less', category: 0},
 			{id:5, title: 'Javascript', slug: 'js', category: 0},
 			{id:6, title: 'JQuery', slug: 'jquery', category: 0},
 			{id:7, title: 'Backbone', slug: 'backbone', category: 0},
@@ -117,7 +130,32 @@
 			{id:35, title: 'Shake', slug: 'shake', category: 3}
 		]);
 		
+		var Project = Backbone.Collection.extend({
+			// ...
+		});
+		
+		window.webapps = new Project;
+		webapps.add([
+			{date: '09-2011', company: 'iParadigms', title: 'Turnitin Dashboard',		slug: 'tii-dashboard', 		skills: [1,2,4,5,6,7,21], images: ''},
+			{date: '06-2011', company: 'iParadigms', title: 'Document Viewer (iPad)',	slug: 'dv-ipad', 			skills: [21,24], images: ''},
+			{date: '11-2010', company: 'iParadigms', title: 'Document Viewer (web)',	slug: 'dv-web', 			skills: [21,22], images: ''},
+			{date: '06-2010', company: 'Convio',	 title: 'Participant Center', 		slug: 'pc', 				skills: [21,22], images: ''},
+			{date: '05-2008', company: 'Convio',	 title: 'MultiCenter Panel',	 	slug: 'multicenter-panel', 	skills: [1,5,21], images: ''},
+			{date: '01-2008', company: 'Personal', 	 title: 'Flickr Web Gallery',	 	slug: 'flickr-web-gallery', skills: [1,2,5,21], images: ''}
+		]);
+		
+		window.websites = new Project;
+		websites.add([
+			{date: '09-2011', company: 'Gracepoint', title: 'acts2fellowship Website ("Magazine")',	skills: [1,2,3,5,6,11,13,21,24], images: ''},
+			{date: '10-2010', company: 'Gracepoint', title: 'acts2fellowship Website ("Original")',	skills: [1,2,3,11,13,21], images: ''},
+			{date: '02-2010', company: 'iParadigms', title: 'Turnitin Website Redesign',			skills: [1,2,3,5,6,21,22], images: ''},
+			{date: '11-2009', company: 'Convio', 	 title: 'Convio Open API Website',				skills: [1,2,3,5,6,21,24], images: ''},
+			{date: '05-2009', company: 'Gracepoint', title: 'Kairos Website',						skills: [1,2,5,6,11,13,21], images: ''}
+		]);
+		
 		// Views
+		
+		/* Skillsets */
 		
         var SkillsetsView = Backbone.View.extend({
             el: $('footer'),
@@ -163,37 +201,87 @@
 		
 		var skillsetsview = new SkillsetsView;
 		
-             
+		/* Main */
+		
+        var FrontCardView = Backbone.View.extend({
+            el: $('#front'),
+			// template: _.template($('#contact-card-template').html()),
+
+            initialize: function() {
+                _.bindAll(this, 'render');
+                
+                // this.render();
+            },
+
+            render: function(category, slug) {
+				console.log(category + '/' + slug);
+				var c = eval(category);
+				var project = null;
+				var prev = null;
+				var next = null;
+
+				// if no slug, get the first object from the collection
+				if(_.isUndefined(slug)) { 
+					project = c.at(0); 
+					next = c.at(1);
+				}
+				else {
+					var i = 0;
+					_.each(c.models, function(p) {
+						if (p.get('slug') == slug) {
+							project = p;
+							if (i > 0) prev = c.at(i-1);
+							if (i < c.length-1) next = c.at(i+1);
+							console.log(prev);
+						}
+						i++;
+						// todo: what if slug cannot be found?
+					});
+				}
+				
+				// fill in the card
+				$('#title').html(project.get('title'));
+				$('#company').html(project.get('company'));
+				$('#date').html(project.get('date'));	// todo: change date to proper format
+				this.setNextPrev(next, 'next', category);
+				this.setNextPrev(prev, 'prev', category);
+				// if (next) $('#next').attr('href', '#/' + category + '/' + next.get('slug'));
+
+            },
+			
+			// nextprev = next | prev
+			setNextPrev: function(project, nextprev, category) {
+				var elem =  $('#' + nextprev)
+				if (project) elem.attr('href', '#/' + category + '/' + project.get('slug')).removeClass('disabled');
+				else elem.attr('href', '#').addClass('disabled');
+			}
+		});
+		
+		var frontcardview = new FrontCardView;
+		
         // Router
-        var Rolodex = Backbone.Router.extend({
+        var Portfolio = Backbone.Router.extend({
            routes: {
-               "": "contacts",
-               "/contacts": "contacts",
-               "/contacts/:page": "contacts",
-               "/calendar": "calendar"
+               "": "webapps",
+               "/webapps": "webapps",
+               "/webapps/:slug": "webapps"
            }, 
-           contacts: function(page) {
-               $('.sidebar li').removeClass('active');
-               $('#nav-contacts').addClass('active');
-               $('#calendar').hide();
-               $('#contacts').show();
-               
-               // console.log('page is: ' + page);
-               if (typeof page != 'undefined') {
-                   contactListView.showInfo(page);
-               }
+           webapps: function(slug) {
+			   this.goto('webapps', slug);
            },
-           calendar: function() {
-               $('.sidebar li').removeClass('active');
-               $('#nav-calendar').addClass('active');
-               $('#contacts').hide();
-               $('#calendar').show();
-           }
+		   goto: function(category, slug) {
+			   $('#nav li').removeClass('active');
+			   $('#nav-'+category).addClass('active');
+			   frontcardview.render(category, slug);
+		   }
         });
         
-        // var rolodex = new Rolodex;
-        // Backbone.history.start();
-    });
+        var portfolio = new Portfolio;
+        Backbone.history.start();
+		
+		
+	});
+		
 
     </script>
 </body>
