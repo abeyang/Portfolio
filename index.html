@@ -29,26 +29,40 @@
 			<div id="front" class="span14 offset1 main">
 				<div class="subnav">
 					<div class="row">
-						<div class="span3 prev">
-							<a href="#" id="prev">Previous Project</a>
+						<div class="span2">
+							<span id="list" class="btn disabled">L</span>
 						</div>
-						<div class="span4 title">
+						<div class="span10 title">
 							<div id="title">Title</div>
 						</div>
-						<div class="span4 companydate">
-							<div><span id="company">Company</span> / <span id="date">Dec 2009</span></div>
-						</div>
-						<div class="span3 next">
-							<a id="next">Next Project</a>
+						<div class="span2 nextprev">
+							<a href="#" id="prev" class="btn">P</a><a href="#" id="next" class="btn">N</a>
 						</div>
 					</div>
 				</div>
-				<div id="hero">
-					<img src="http://placehold.it/800x450">					
+				<div class="row">
+					<div id="info" class="span14">
+						<div class="row">
+							<div class="span4"><span id="company">Company</span></div>
+							<div class="span6">
+								<div id="bullets" class="size5">
+									<span id="bullet-1" data-id="1">&nbsp;</span>
+									<span id="bullet-2" data-id="2">&nbsp;</span>
+									<span id="bullet-3" data-id="3">&nbsp;</span>
+									<span id="bullet-4" data-id="4">&nbsp;</span>
+									<span id="bullet-5" data-id="5">&nbsp;</span>							
+								</div>
+							</div>
+							<div class="span4 date"><span id="date">Date</span></div>
+						</div>
+					</div>
 				</div>
-				<div id="content">
-					Nulla vitae elit libero, a pharetra augue. Cum sociis natoque penatibus et magnis dis parturient montes, nascetur ridiculus mus. Vivamus sagittis lacus vel augue laoreet rutrum faucibus dolor auctor. Cras mattis consectetur purus sit amet fermentum. Vivamus sagittis lacus vel augue laoreet rutrum faucibus dolor auctor. Maecenas faucibus mollis interdum. Integer posuere erat a ante venenatis dapibus posuere velit aliquet. Maecenas faucibus mollis interdum. Etiam porta sem malesuada magna mollis euismod. Cras justo odio, dapibus ac facilisis in, egestas eget quam. Morbi leo risus, porta ac consectetur ac, vestibulum at eros.
+				<div id="wrapper">
+					<div id="track">
+
+					</div>
 				</div>
+
 			</div> <!-- /#front -->
 			
 			<div id="back" class="span14 offset1 main">
@@ -75,14 +89,15 @@
         <li id="skill-<%= id %>"><%= title %></li>
     </script>
 
-    <script type="text/template" id="contact-card-template"> 
-	    <div id="contact-card">
-	    	<div id="card-name" class="row"><strong><%= first %></strong> <%= last %></div>
-			<div id="card-major" class="row">Major: <%= grade ? '<span>' + grade + '</span>' : '' %><%= major %></div>
-			<% if (email) { %><div id="card-email" class="row">Email: <%= email %></div><% } %>
-			<% if (phone) { %><div id="card-phone" class="row">Phone: <%= phone %></div><% } %>
-			<% if (hometown) { %><div id="card-hometown" class="row">Hometown: <%= hometown %></div><% } %>
-	    </div>
+    <script type="text/template" id="slide-template"> 
+		<div class="slide">
+			<div class="hero">
+				<img src="<%= url %>" />
+			</div>
+			<div class="content">
+				<%= content %>
+			</div>							
+		</div> 
     </script>
     
     <!-- JS Shtuff -->
@@ -91,198 +106,7 @@
 	<script src="../../js/json2.js" type="text/javascript"></script>
     <script src="../../js/underscore.js" type="text/javascript"></script>
     <script src="../../js/backbone.js" type="text/javascript"></script>
-    
-    <script>
-
-    $(function() {
-        less.env = "development";
-        less.watch();
-		
-		// Collections
-		
-        var Skillsets = Backbone.Collection.extend({
-			// ...
-        });
-		
-		window.skillsets = new Skillsets;
-		skillsets.add([
-			{id:1, title: 'HTML/HTML5', slug: 'html', category: 0},
-			{id:2, title: 'CSS/CSS3', slug: 'css', category: 0},
-			{id:3, title: '960.gs', slug: '960', category: 0},
-			{id:4, title: 'Less+Bootstrap', slug: 'less', category: 0},
-			{id:5, title: 'Javascript', slug: 'js', category: 0},
-			{id:6, title: 'JQuery', slug: 'jquery', category: 0},
-			{id:7, title: 'Backbone', slug: 'backbone', category: 0},
-			
-			{id:11, title: 'PHP', slug: 'php', category: 1},
-			{id:12, title: 'Ruby on Rails', slug: 'ror', category: 1},
-			{id:13, title: 'Wordpress', slug: 'wp', category: 1},
-			
-			{id:21, title: 'Photoshop', slug: 'ps', category: 2},
-			{id:22, title: 'Illustrator', slug: 'il', category: 2},
-			{id:23, title: 'Omnigraffle', slug: 'om', category: 2},
-			{id:24, title: 'Invision', slug: 'iv', category: 2},
-			
-			{id:31, title: 'Final Cut Pro', slug: 'fcp', category: 3},
-			{id:32, title: 'Premiere', slug: 'pr', category: 3},
-			{id:33, title: 'After Effects', slug: 'ae', category: 3},
-			{id:34, title: 'Maya', slug: 'maya', category: 3},
-			{id:35, title: 'Shake', slug: 'shake', category: 3}
-		]);
-		
-		var Project = Backbone.Collection.extend({
-			// ...
-		});
-		
-		window.webapps = new Project;
-		webapps.add([
-			{date: '09-2011', company: 'iParadigms', title: 'Turnitin Dashboard',		slug: 'tii-dashboard', 		skills: [1,2,4,5,6,7,21], images: ''},
-			{date: '06-2011', company: 'iParadigms', title: 'Document Viewer (iPad)',	slug: 'dv-ipad', 			skills: [21,24], images: ''},
-			{date: '11-2010', company: 'iParadigms', title: 'Document Viewer (web)',	slug: 'dv-web', 			skills: [21,22], images: ''},
-			{date: '06-2010', company: 'Convio',	 title: 'Participant Center', 		slug: 'pc', 				skills: [21,22], images: ''},
-			{date: '05-2008', company: 'Convio',	 title: 'MultiCenter Panel',	 	slug: 'multicenter-panel', 	skills: [1,5,21], images: ''},
-			{date: '01-2008', company: 'Personal', 	 title: 'Flickr Web Gallery',	 	slug: 'flickr-web-gallery', skills: [1,2,5,21], images: ''}
-		]);
-		
-		window.websites = new Project;
-		websites.add([
-			{date: '09-2011', company: 'Gracepoint', title: 'acts2fellowship Website ("Magazine")',	skills: [1,2,3,5,6,11,13,21,24], images: ''},
-			{date: '10-2010', company: 'Gracepoint', title: 'acts2fellowship Website ("Original")',	skills: [1,2,3,11,13,21], images: ''},
-			{date: '02-2010', company: 'iParadigms', title: 'Turnitin Website Redesign',			skills: [1,2,3,5,6,21,22], images: ''},
-			{date: '11-2009', company: 'Convio', 	 title: 'Convio Open API Website',				skills: [1,2,3,5,6,21,24], images: ''},
-			{date: '05-2009', company: 'Gracepoint', title: 'Kairos Website',						skills: [1,2,5,6,11,13,21], images: ''}
-		]);
-		
-		// Views
-		
-		/* Skillsets */
-		
-        var SkillsetsView = Backbone.View.extend({
-            el: $('footer'),
-			template: _.template($('#skillset-item-template').html()),
-            initialize: function() {
-                _.bindAll(this, 'render');
-                
-                this.render();
-            },
-
-            render: function() {
-				var currentcat = 0;
-				var div = $('<div>').addClass('span3');
-
-                _(skillsets.models).each(function(item) {
-					// create a new column
-					if (currentcat != item.get('category')) {
-						currentcat = item.get('category');
-						$(this.el).append(div);
-						div = $('<div>').addClass('span3');
-					}
-					div.append(this.template(item.toJSON()));
-                }, this);
-				
-				// necessary for final column
-				$(this.el).append(div);
-            },
-            
-            addItem: function(contact) {
-				var contactView = new ContactView({
-					model: contact
-				});
-				$(this.el).append(contactView.render().el);
-            },
-            
-            // highlight contact in list, and show its info
-            showInfo: function(id) {
-                $('.contact-item').removeClass('active');
-                $('#contactlist-' + id).addClass('active');
-                $('#contactinfo').html(this.template(contactsMini.get(id).toJSON()));
-            }
-        });
-		
-		var skillsetsview = new SkillsetsView;
-		
-		/* Main */
-		
-        var FrontCardView = Backbone.View.extend({
-            el: $('#front'),
-			// template: _.template($('#contact-card-template').html()),
-
-            initialize: function() {
-                _.bindAll(this, 'render');
-                
-                // this.render();
-            },
-
-            render: function(category, slug) {
-				console.log(category + '/' + slug);
-				var c = eval(category);
-				var project = null;
-				var prev = null;
-				var next = null;
-
-				// if no slug, get the first object from the collection
-				if(_.isUndefined(slug)) { 
-					project = c.at(0); 
-					next = c.at(1);
-				}
-				else {
-					var i = 0;
-					_.each(c.models, function(p) {
-						if (p.get('slug') == slug) {
-							project = p;
-							if (i > 0) prev = c.at(i-1);
-							if (i < c.length-1) next = c.at(i+1);
-							console.log(prev);
-						}
-						i++;
-						// todo: what if slug cannot be found?
-					});
-				}
-				
-				// fill in the card
-				$('#title').html(project.get('title'));
-				$('#company').html(project.get('company'));
-				$('#date').html(project.get('date'));	// todo: change date to proper format
-				this.setNextPrev(next, 'next', category);
-				this.setNextPrev(prev, 'prev', category);
-				// if (next) $('#next').attr('href', '#/' + category + '/' + next.get('slug'));
-
-            },
-			
-			// nextprev = next | prev
-			setNextPrev: function(project, nextprev, category) {
-				var elem =  $('#' + nextprev)
-				if (project) elem.attr('href', '#/' + category + '/' + project.get('slug')).removeClass('disabled');
-				else elem.attr('href', '#').addClass('disabled');
-			}
-		});
-		
-		var frontcardview = new FrontCardView;
-		
-        // Router
-        var Portfolio = Backbone.Router.extend({
-           routes: {
-               "": "webapps",
-               "/webapps": "webapps",
-               "/webapps/:slug": "webapps"
-           }, 
-           webapps: function(slug) {
-			   this.goto('webapps', slug);
-           },
-		   goto: function(category, slug) {
-			   $('#nav li').removeClass('active');
-			   $('#nav-'+category).addClass('active');
-			   frontcardview.render(category, slug);
-		   }
-        });
-        
-        var portfolio = new Portfolio;
-        Backbone.history.start();
-		
-		
-	});
-		
-
-    </script>
+    <script src="portfolio.js" type="text/javascript"></script>
+	
 </body>
 </html>

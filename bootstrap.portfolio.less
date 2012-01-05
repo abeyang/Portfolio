@@ -91,52 +91,98 @@ body {
 		height: @space * 4;
 		#gradient > .vertical(#eee, #ddd);
 		border-bottom: @borderColor;
-/*		background: @bgColor url(http://subtlepatterns.com/patterns/wood_pattern.png) top left repeat;*/
 		.border-radius(5px 5px 0 0);
 		color: #333;
 		
-		.prev a, .next a {
-			display: block;
+		.btn {
 			color: #000;
-			padding: @space;
-			padding-bottom: @space + 2;
-			
-			&:hover {
-/*				#gradient > .vertical(#ccc, #aaa);*/
-				color: @linkColor;
-				cursor: pointer;
-				text-decoration: none;
-			}
-			
-			&.disabled { color: #ccc; }
+			margin-top: 5px;
 		}
 		
-		.title div, .companydate div {
-			padding: @space 0;
+		.nextprev { text-align:right; }
+		
+		#list { margin-left: @space; }
+		#next {
+			margin-right: @space;
+			.border-radius(0 5px 5px 0);
+		}
+		#prev {
+			.border-radius(5px 0 0 5px);
+			border-right: none;
 		}
 		
 		.title div {
+			padding: @space 0;
 			font-weight: bold;
-		}
-		
-		.companydate div { text-align: right; }
-		
-		.prev a {
-			border-right: @borderColor;
-		}
-		
-		.next a { 
-			text-align: right; 
-			border-left: @borderColor;
+			text-align: center;
 		}
 	}
 	
-	#hero, #content {
-		padding: @space @space 0;
+	#info {
+		padding: 2px 0;
+		background-color: #fafafa;
+		border-bottom: 1px solid #eee;
+		margin-bottom: @space;
+
+		#company, #date {
+			color: #aaa;
+		}
+		#company { margin-left: @space; }
+		#date { margin-right: @space; }
+		.date { text-align: right; }
+		
+		#bullets {
+			text-align: center;
+			margin: 0 auto;
+			.clearfix();
+			
+			&.size1 { width: @space*2; }
+			&.size2 { width: @space*4; }
+			&.size3 { width: @space*6; }
+			&.size4 { width: @space*8; }
+			&.size5 { width: @space*10; }
+			
+			span {
+				.border-radius();
+				.square(@space);
+				background-color: #ccc;
+				float: left;
+				margin: 5px;
+				cursor: pointer;
+				.transition(all 0.2s ease-in-out);
+				
+				&.active { background-color: #0090ff; }
+				
+				&:hover { background-color: #555; }
+			}
+		}
 	}
-	#content {
-		.content-columns(2, 40px);
-		color: #777;
+	
+	#wrapper {
+		margin: 0 @space @space;
+		overflow: hidden;
+		width: 800px;
+		height: 555px;
+		
+		#track {
+			width: 4100px;
+			position: relative;
+		}
+		
+		.slide {
+			float: left;
+			width: 800px;
+			margin-right: 10px;
+				
+			.hero {
+				margin-bottom: @space;
+			}
+			.content {
+/*				.content-columns(2, 20px);*/
+				height: 95px;
+				color: #777;
+			}
+		}
 	}
 	
 }
@@ -159,11 +205,19 @@ body {
 footer { 
 	border-top: none; 
 	margin-top: 0;
+	margin-bottom: @space * 2;
 	
 	li { 
 		list-style-type: none; 
 		font-size: 11px;
 		line-height: 1.5;
+		.transition(all 0.5s ease-in-out);
+		
+		&.highlight {
+			color: #555;
+			font-weight: bold;
+			text-shadow: 0 1px 1px rgba(0,0,0,.5);
+		}
 	}
 	
 	li, h3 {
