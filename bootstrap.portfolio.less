@@ -72,10 +72,18 @@ body {
 		margin-left: @space;
 		.border-radius(15px);
 		padding: @space/2 @space;
+		color: #aaa; // inactive
 		
 		&.active {
 			background-color: rgba(0,0,0,.1);
 			.box-shadow(@shadowDepressed);
+		}
+		
+		a { 
+			color: #333; 
+			text-decoration: none; 
+			
+			&:hover { color: @linkColor; }
 		}
 	}
 }
@@ -86,6 +94,7 @@ body {
 	.border-radius();
 	border: @borderColor;
 	.box-shadow(@shadowBorder);
+	background-color: #fafafa;
 
 	.subnav {
 		height: @space * 4;
@@ -115,6 +124,8 @@ body {
 			padding: @space 0;
 			font-weight: bold;
 			text-align: center;
+			text-shadow: 0 1px 0 #fff;
+			color: #222;
 		}
 	}
 	
@@ -122,7 +133,6 @@ body {
 		padding: 2px 0;
 		background-color: #fafafa;
 		border-bottom: 1px solid #eee;
-		margin-bottom: @space;
 
 		#company, #date {
 			color: #aaa;
@@ -150,8 +160,9 @@ body {
 				margin: 5px;
 				cursor: pointer;
 				.transition(all 0.2s ease-in-out);
+				.box-shadow(@shadowDepressed);
 				
-				&.active { background-color: #0090ff; }
+				&.active { background-color: @linkColor; }
 				
 				&:hover { background-color: #555; }
 			}
@@ -159,10 +170,10 @@ body {
 	}
 	
 	#wrapper {
-		margin: 0 @space @space;
+		margin: 0 0 @space;
 		overflow: hidden;
-		width: 800px;
-		height: 555px;
+		width: 820px;
+		height: 580px;
 		
 		#track {
 			width: 4100px;
@@ -171,16 +182,19 @@ body {
 		
 		.slide {
 			float: left;
-			width: 800px;
-			margin-right: 10px;
-				
+			width: 820px;
+
 			.hero {
-				margin-bottom: @space;
+				padding: @space;
+				background-color: #fff;
 			}
 			.content {
-/*				.content-columns(2, 20px);*/
-				height: 95px;
-				color: #777;
+				color: #333;
+				border-top: 1px solid #eee;
+				padding: @space @space 0;
+				
+				p { font-size: 14px; line-height: 1.5; }
+				strong { color: #000; }
 			}
 		}
 	}

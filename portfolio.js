@@ -8,7 +8,7 @@ $(function() {
 		// ...
     });
 		
-	window.skillsets = new Skillsets;
+	var skillsets = new Skillsets;
 	skillsets.add([
 		{id:1, title: 'HTML/HTML5', slug: 'html', category: 0},
 		{id:2, title: 'CSS/CSS3', slug: 'css', category: 0},
@@ -38,21 +38,21 @@ $(function() {
 		// ...
 	});
 		
-	/* media should be 800 x 450 (or fullsize at 800 x 560 w/ no content)*/
+	/* media should be 800 x 450 (max at 800 x 560 w/ no content) */
 		
-	window.webapps = new Project;
+	var webapps = new Project;
 	webapps.add([
 		{date: '09-2011', company: 'iParadigms', title: 'Turnitin Dashboard',		slug: 'tii-dashboard', 		skills: [1,2,4,5,6,7,21], media: [
 			{type: 'image', url: 'http://farm8.staticflickr.com/7166/6638389465_2084d7fab9_o.jpg', 
 			content: "**Designed** a dashboard that gives instructors a bird's eye view to see assignments from all their classes. I also **implemented a working prototype** to give us a better idea as to how all the different interactions (on-hover, dropdown, on-click, etc) would work."},
 			{type: 'image', url: 'http://farm8.staticflickr.com/7167/6638389979_678b569597_o.jpg', 
-			content: "Version 2 of the project includes analytics and graphs."}
+			content: "Designed analytics and graphs"}
 		]},
 		{date: '06-2011', company: 'iParadigms', title: 'Document Viewer (iPad)',	slug: 'dv-ipad', 			skills: [21,24], media: [
-			{type: 'image', url: 'http://farm8.staticflickr.com/7016/6638752281_6d9b37daa8_o.jpg', content: "Nulla vitae elit libero, a pharetra augue. Cum sociis natoque penatibus et magnis dis parturient montes, nascetur ridiculus mus. Vivamus sagittis lacus vel augue laoreet rutrum faucibus dolor auctor. Cras mattis consectetur purus sit amet fermentum. Vivamus sagittis lacus vel augue laoreet rutrum faucibus dolor auctor. Maecenas faucibus mollis interdum. Integer posuere erat a ante venenatis dapibus posuere velit aliquet. Maecenas faucibus mollis interdum. Etiam porta sem malesuada magna mollis euismod. Cras justo odio, dapibus ac facilisis in, egestas eget quam. Morbi leo risus, porta ac consectetur ac, vestibulum at eros."},
+			{type: 'image', url: 'http://farm8.staticflickr.com/7016/6638752281_6d9b37daa8_o.jpg', 
+			content: "Designed an iPad version of our flagship product. Used InVision to help piece together the different mocks &mdash; very instrumental when prototyping directly on an iPad."},
 			{type: 'image', url: 'http://farm8.staticflickr.com/7143/6638752671_6ff757d0ac_b.jpg', content: ""},
 			{type: 'image', url: 'http://farm8.staticflickr.com/7167/6638753055_d6a503f5e3_b.jpg', content: ""}
-			
 		]},
 		{date: '11-2010', company: 'iParadigms', title: 'Document Viewer (web)',	slug: 'dv-web', 			skills: [21,22], media: []},
 		{date: '06-2010', company: 'Convio',	 title: 'Participant Center', 		slug: 'pc', 				skills: [21,22], media: []},
@@ -60,14 +60,45 @@ $(function() {
 		{date: '01-2008', company: 'Personal', 	 title: 'Flickr Web Gallery',	 	slug: 'flickr-web-gallery', skills: [1,2,5,21], media: []}
 	]);
 		
-	window.websites = new Project;
+	var websites = new Project;
 	websites.add([
-		{date: '09-2011', company: 'Gracepoint', title: 'acts2fellowship Website ("Magazine")',	skills: [1,2,3,5,6,11,13,21,24], media: []},
-		{date: '10-2010', company: 'Gracepoint', title: 'acts2fellowship Website ("Original")',	skills: [1,2,3,11,13,21], media: []},
-		{date: '02-2010', company: 'iParadigms', title: 'Turnitin Website Redesign',			skills: [1,2,3,5,6,21,22], media: []},
-		{date: '11-2009', company: 'Convio', 	 title: 'Convio Open API Website',				skills: [1,2,3,5,6,21,24], media: []},
-		{date: '05-2009', company: 'Gracepoint', title: 'Kairos Website',						skills: [1,2,5,6,11,13,21], media: []}
+		{date: '09-2011', company: 'Gracepoint', title: 'acts2fellowship Website ("Magazine")',	slug: 'a2f-website-magazine', skills: [1,2,3,5,6,11,13,21,24], media: []},
+		{date: '10-2010', company: 'Gracepoint', title: 'acts2fellowship Website ("Original")',	slug: 'a2f-website', skills: [1,2,3,11,13,21], media: []},
+		{date: '02-2010', company: 'iParadigms', title: 'Turnitin Website Redesign',			slug: 'tii-web-redesign', skills: [1,2,3,5,6,21,22], media: []},
+		{date: '11-2009', company: 'Convio', 	 title: 'Convio Open API Website',				slug: 'convio-open-api', skills: [1,2,3,5,6,21,24], media: []},
+		{date: '05-2009', company: 'Gracepoint', title: 'Kairos Website',						slug: 'kairos-website', skills: [1,2,5,6,11,13,21], media: []}
 	]);
+	
+	window.videos = new Project;
+	videos.add([
+		{date: '08-2011', company: 'Gracepoint', title: 'Thrive',	slug: 'thrive',	skills: [31,33], media: [
+			{type: 'vimeo', url: '28083955', content: ''}
+		]},
+		{date: '04-2011', company: 'Gracepoint', title: 'Easter Intro',	slug: 'easter-intro', skills: [21,33], media: [
+			{type: 'vimeo', url: '23226173', content: ''}
+		]},
+		{date: '08-2010', company: 'Gracepoint', title: 'Welcome to Gracepoint', slug: 'welcome-to-gracepoint',	skills: [21,31,33], media: [
+			{type: 'vimeo', url: '15676413', content: ''}
+		]},
+		{date: '11-2009', company: 'Gracepoint', title: 'Thanksgiving Celebration Opening',	slug: 'tc-opening', skills: [22,33], media: [
+			{type: 'vimeo', url: '12440157', height: 530, content: "Intro video that started Gracepoint's Thanksgiving Celebration. A look back into 2009, especially that of a recent production. Process began with blocking in the big bold letters and filling in all the items in Illustrator. Afterwards, everything is  ported into After Effects for animation. One week to complete from start to finish."}
+		]},
+		{date: '04-2009', company: 'Gracepoint', title: 'Gracepoint Live: Undo', slug: 'glive-undo', skills: [31], media: [
+			{type: 'vimeo', url: '3993031', content: "**Intro video to a theatrical production**. Special thanks to the Class of 2009, from modifying a potato launcher to shoot out flour to set design (and providing actors). Matt was the awesome cameraman who operated smoothly without a glidecam, and Richard D. helped with graphic design and fashion tips. Props go out to Kevan, Jenny, Pastor Ed, and Kelly Kang for guidance through the midst of the project, when things went awry. Another big thanks to Conrad, Paul, and Po for helping with all things post-related, such as grading, retiming, foley effects, and the most important part, creating the soundtrack in less than one day."}
+		]},
+		{date: '12-2008', company: 'Personal', title: 'San Francisco Bart Surprise', slug: 'sf-bart-surprise', skills: [34,35], media: [
+			{type: 'vimeo', url: '4157430', height: 530, content: "Visual effects project. Eight weeks to complete"}
+		]},
+		{date: '12-2008', company: 'Personal', title: 'Tenshin', slug: 'tenshin', skills: [34,35], media: [
+			{type: 'vimeo', url: '5086644', height: 480, content: "15-week project that resulted in this two-second clip. First eight weeks to draw, design, and build the character in Maya; five weeks to rig and animate the characters; two weeks to composite with Shake and add final touches."}
+		]},
+		{date: '04-2007', company: 'Gracepoint', title: 'Gracepoint Live: Lost and Found', slug: 'glive-lost-found', skills: [31,35], media: [
+			{type: 'vimeo', url: '3993031', height: 540, content: "**Intro video to a theatrical production**. Thanks to Conrad for helping on and off set, Matt for supervising fashion, Jackson for being the on-set assistant, and Jammy for finding the right soundtrack pieces. Another thanks to the actors, Jeff, Nelson, and Jenny, for being good sports through the whole process."}
+		]}
+	]);
+	
+	
+	
 		
 	// Views
 		
@@ -129,12 +160,14 @@ $(function() {
 			// initialize slider bullets
             $('#bullets span').click(function() {
 				var mult = $(this).attr('data-id') - 1; // multiplier: 0-4
-				var move = mult * -810;					// constant: -810px
+				var move = mult * -820;					// constant: -820px
 				$('#track').animate({left: move}, 500); // move track
 					
 				$('#bullets span').removeClass('active');
 				$(this).addClass('active');
 			});
+			
+			this.markdown = new Showdown.converter();
         },
 
         render: function(category, slug) {
@@ -144,6 +177,7 @@ $(function() {
 			var next = null;
 
 			// if no slug, get the first object from the collection
+			// todo: should show project list by default
 			if(_.isUndefined(slug)) { 
 				project = c.at(0); 
 				next = c.at(1);
@@ -160,11 +194,14 @@ $(function() {
 					// todo: what if slug cannot be found?
 				});
 			}
+			
+			// todo: update title
 				
 			// populate fields inside card
 			$('#title').html(project.get('title'));
 			$('#company').html(project.get('company'));
-			$('#date').html(project.get('date'));	// todo: change date to proper format
+			var m = moment(project.get('date'), 'MM-YYYY');
+			$('#date').html(m.format('MMM YYYY'));	// format date
 			this.setNextPrev(next, 'next', category);
 			this.setNextPrev(prev, 'prev', category);
 				
@@ -177,6 +214,9 @@ $(function() {
 			// populate slides
 			$('#track').html('');	// reset
 			_.each(project.get('media'), function(m) {
+				if (!m.height) m.height = 450;						// default height -- only applies to videos
+				console.log(m.height);
+				m.md_content = this.markdown.makeHtml(m.content);	// format (markdown) content
 				$('#track').append(this.template(m));
 			}, this);
 				
@@ -184,7 +224,7 @@ $(function() {
 			var len = project.get('media').length;
 			// don't show bullets at all if there's only 1
 			if (len <= 1) {
-				// .hide() will mess up overall layout
+				// cannot use .hide(); will mess up overall layout
 				$('#bullets').css('visibility', 'hidden');
 			}
 			else {
@@ -220,10 +260,20 @@ $(function() {
        routes: {
            "": "webapps",
            "/webapps": "webapps",
-           "/webapps/:slug": "webapps"
+           "/webapps/:slug": "webapps",
+		   "/websites": "websites",
+		   "/websites/:slug": "websites",
+		   "/videos": "videos",
+		   "/videos/:slug": "videos"
        }, 
        webapps: function(slug) {
 		   this.goto('webapps', slug);
+       },
+       websites: function(slug) {
+		   this.goto('websites', slug);
+       },
+       videos: function(slug) {
+		   this.goto('videos', slug);
        },
 	   goto: function(category, slug) {
 		   $('#nav li').removeClass('active');
